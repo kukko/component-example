@@ -50,4 +50,31 @@ export class Tree implements AfterContentInit {
   getToggleNodeFunction(index: number) {
     return () => this.toggleNode(index);
   }
+
+  getChildrenForChildTree(node: TreeNode): TreeNode[] | undefined {
+    if (node.children) {
+      return [
+        ...node.children.map((child) => {
+          const output = {
+            ...child
+          };
+          output.parent = node;
+          return output;
+        })
+      ];
+    }
+    else {
+      return node.children;
+    }
+  }
+
+  getLevelOfNode(node: TreeNode): number {
+    let level = 0;
+    let currentNode = node;
+    while (currentNode.parent) {
+      level++;
+      currentNode = currentNode.parent;
+    }
+    return level;
+  }
 }

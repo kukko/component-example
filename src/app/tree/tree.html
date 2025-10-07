@@ -1,6 +1,6 @@
 @for (node of nodes(); track $index) {
   @if (contentTemplate){
-  <ng-container *ngTemplateOutlet="contentTemplate; context: { $implicit: node, toggle: getToggleNodeFunction($index), isOpened: nodeIsOpened($index) }" (click)="toggleNode($index)"></ng-container>
+  <ng-container *ngTemplateOutlet="contentTemplate; context: { $implicit: node, toggle: getToggleNodeFunction($index), isOpened: nodeIsOpened($index), parent: node.parent, level: getLevelOfNode(node) }" (click)="toggleNode($index)"></ng-container>
   }
   @else {
   <div (click)="toggleNode($index)">
@@ -9,6 +9,6 @@
   }
   <!-- <li (click)="toggleNode($index)">{{ node.label }}</li> -->
   @if (node.children && nodeIsOpened($index)){
-    <app-tree [nodes]="node.children" (nodeToggled)="nodeToggled.emit($event)" [contentTemplate]="contentTemplate"></app-tree>
+    <app-tree [nodes]="getChildrenForChildTree(node)!" (nodeToggled)="nodeToggled.emit($event)" [contentTemplate]="contentTemplate"></app-tree>
   }
 }

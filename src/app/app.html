@@ -1,5 +1,5 @@
 <app-tree [nodes]="treeNodes" (nodeToggled)="onNodeToggled($event)">
-  <ng-template let-node let-toggle="toggle" let-isOpened="isOpened">
+  <ng-template let-node let-toggle="toggle" let-isOpened="isOpened" let-parent="parent" let-level="level">
     <div (click)="toggle()">
       @if (isOpened){
         <strong>-</strong>
@@ -7,7 +7,10 @@
       @else{
         <strong>+</strong>
       }
-      {{ node.label }}
+      {{ node.label }} [{{ level }}]
+      @if (parent){
+        ({{ parent.label }})
+      }
     </div>
   </ng-template>
 </app-tree>
