@@ -9,6 +9,6 @@
   }
   <!-- <li (click)="toggleNode($index)">{{ node.label }}</li> -->
   @if (node.children){
-    <app-tree [nodes]="getChildrenForChildTree(node)!" (nodeToggled)="nodeToggled.emit($event)" [contentTemplate]="contentTemplate" [style.display]="nodeIsOpened($index) ? 'block' : 'none'"></app-tree>
+    <app-tree #childTree [nodes]="getChildrenForChildTree(node)!" (nodeToggled)="nodeToggled.emit($event)" [contentTemplate]="contentTemplate" [style.display]="nodeIsOpened($index) ? 'block' : 'none'"></app-tree>
   }
 }

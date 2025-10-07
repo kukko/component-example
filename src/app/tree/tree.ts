@@ -1,4 +1,4 @@
-import { AfterContentInit, Component, ContentChild, Input, input, output, TemplateRef } from '@angular/core';
+import { AfterContentInit, Component, ContentChild, Input, input, output, QueryList, TemplateRef, ViewChildren } from '@angular/core';
 import { TreeNode } from '../../types/tree-node';
 import { TreeNodeToggledEvent } from '../../types/tree-node-toggled-event';
 import { NgTemplateOutlet } from '@angular/common';
@@ -19,6 +19,8 @@ export class Tree implements AfterContentInit {
   nodeToggled = output<TreeNodeToggledEvent>();
 
   openedNodeIndexes = new Set<number>();
+
+  @ViewChildren('childTree') childTrees!: QueryList<Tree>;
 
   ngAfterContentInit() {
     if (!this.contentTemplate && this.projectedTemplate) {
@@ -76,5 +78,12 @@ export class Tree implements AfterContentInit {
       currentNode = currentNode.parent;
     }
     return level;
+  }
+
+  closeAllNodes(closeChildren: boolean) {
+    this.openedNodeIndexes.clear();
+    if (closeChildren) {
+      this.childTrees.forEach(childTree => childTree.closeAllNodes(true));
+    }
   }
 }

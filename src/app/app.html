@@ -1,4 +1,6 @@
-<app-tree [nodes]="treeNodes" (nodeToggled)="onNodeToggled($event)">
+<button (click)="tree.closeAllNodes(false)">Close root nodes</button>
+<button (click)="tree.closeAllNodes(true)">Close all nodes</button>
+<app-tree #tree [nodes]="treeNodes" (nodeToggled)="onNodeToggled($event)">
   <ng-template let-node let-toggle="toggle" let-isOpened="isOpened" let-parent="parent" let-level="level">
     <div (click)="toggle()">
       @if (isOpened){
