@@ -1,0 +1,7 @@
+<app-tree [nodes]="treeNodes" (nodeToggled)="onNodeToggled($event)">
+  <ng-template let-node let-toggle="toggle">
+    <div (click)="toggle()">
+      {{ node.label }}
+    </div>
+  </ng-template>
+</app-tree>
