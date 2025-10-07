@@ -1,6 +1,6 @@
 @for (node of nodes(); track $index) {
   @if (contentTemplate){
-  <ng-container *ngTemplateOutlet="contentTemplate; context: { $implicit: node, toggle: getToggleNodeFunction($index) }" (click)="toggleNode($index)"></ng-container>
+  <ng-container *ngTemplateOutlet="contentTemplate; context: { $implicit: node, toggle: getToggleNodeFunction($index), isOpened: nodeIsOpened($index) }" (click)="toggleNode($index)"></ng-container>
   }
   @else {
   <div (click)="toggleNode($index)">
